@@ -78,7 +78,62 @@
                         
                     }
 
-                
+                 
+                    if(sadTest > sadThresh){
+                        document.write("<br /><b><a href='sms://+14035550185? body=I NEED HELP'>I NEED HELP</a></b><br />");
+                        
+                        //var sadTxt = "<a href='sms://+14035550185? body=I NEED HELP!!!'>I NEED HELP!!!</a>";
+                        //document.getElementById(lblSad).innerHTML(sadTxt);
+                    }
+                     else{
+                        document.write("<br />I will be fine!!<br />");
+                        
+                        //var imOkTxt = "I am OK!!!";
+                        //document.getElementById(lblImOk).innerHTML(imOkTxt);
+                        }
+                    
+               }
+          }).fail(function(){
+              console.log("error");
+          })//        
+       }                    
+        </script>
+        <style type="text/css">
+            body
+            {
+                background-color: #A70065;
+                background-image: url("http://www.nothingbutstem.com/wp-content/uploads/2017/11/Emotions2.jpg");
+                background-size: 800px 360px;
+                background-repeat:repeat-x;
+                background-position: 80px 100px; 
+                background-color: #cccccc;
+            }
+            
+            
+        
+        </style>
+        <div>            
+            
+            <br/>                 
+                 <input id = "imgurl" type="text"/> Image URL   
+
+            <br />
+                <br />
+                   <button type="submit" onclick="submit(document.getElementById('imgurl').value)" id=testButton> Submit </button>
+        </div>
+            
+        <div>
+            <label id="lblFear"></label><br />
+            <label id="lblSad"></label><br />
+            <label id="lblImOk"></label><br />            
+        </div>
+        
+       
+        
+    </body>
+</html>
+
+
 
 
 
