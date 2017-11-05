@@ -1,3 +1,4 @@
+
 <html>
     <head>
     <title>Emotion recognition for crisis </title>
@@ -26,7 +27,7 @@
                 //sendAPIRequest(preview.src);
                // sendAPIRequest(imgurl);
            //var value = document.getElementById('imgurl').value;
-           alert("Submit button clicked" + input);
+           //alert("Submit button clicked" + input);
            sendAPIRequest(input);
            return true;
            }
@@ -40,6 +41,7 @@
           $.ajax({
             url: "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?" + $.param(params),
             beforeSend: function(xhrObj){
+
                 // Request headers
                 xhrObj.setRequestHeader("Content-Type","application/json");
 
@@ -57,70 +59,26 @@
                     sadTest = data[i].scores.sadness;
                     
                     if(fearTest > fearThresh){
-                         document.write("<br />" + "<a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'> " + "HELP ME I'M SCARED!!! :-(" + "</a>");
-                        //var fearTxt = "<a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a>";
-                        //document.getElementById(lblFear).innerHTML(fearTxt);
+                         document.write("<br /><b><a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a></b><br />");
+                        //var fearTxt = "<a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a><br />";
+                        
+                        //var fearTxtLocal = "Help Me I'm Scared!!";
+                        
+                        //document.getElementById(lblFear).value = fearTxtLocal;
+                        
+                        
                     }
                     else{ 
-                        document.write("I will be alright !");
+                        document.write("<br />I will be alright!!<br />");
+                        
+                        //fearTxtLocal = "I'm Alright!!";
                         
                         //var imOkTxt = "I am OK!!!";
                         //document.getElementById(lblImOk).innerHTML(imOkTxt);
                         
                     }
-                  
-                    if(sadTest > sadThresh){
-                        document.write("<br />" + "<a href='sms://+14035550185? body= I NEED HELP!!!'> " + " I NEED HELP!!! :-(" + "</a>");
-                        
-                        //var sadTxt = "<a href='sms://+14035550185? body=I NEED HELP!!!'>I NEED HELP!!!</a>";
-                        //document.getElementById(lblSad).innerHTML(sadTxt);
-                    }
-                     else{
-                        document.write("I will be fine");
-                        
-                        //var imOkTxt = "I am OK!!!";
-                        //document.getElementById(lblImOk).innerHTML(imOkTxt);
-                        }
-                    
-               }
-          }).fail(function(){
-              console.log("error");
-          })//        
-       }                    
-        </script>
-        <style type="text/css">
-            body
-            {
-                background-color: powderblue;
-                background-image: url("http://www.nothingbutstem.com/wp-content/uploads/2017/11/emotions3.png");
-                background-size: 800px 360px;
-                background-repeat: repeat;
-                background-position: 50px 100px; 
-                background-color: #cccccc;
 
-            }
-        
-        </style>
-        <div>            
-            <br>                 
-                 <input id = "imgurl" type="text"/> Image URL   
-                 <br>
-               <button type="submit" onclick="submit(document.getElementById('imgurl').value)" id=testButton> Submit </button>
-            </div>
-            
-            <div>
-            <label id="lblFear"></label><br />
-            <label id="lblSad"></label><br />
-            <label id="lblImOk"></label><br />
-            
-            </div>
-        
-       
-        
-    </body>
-</html>
-
-
+                
 
 
 
