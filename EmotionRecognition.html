@@ -1,140 +1,268 @@
 
 <html>
-    <head>
-    <title>Emotion recognition for crisis </title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    </head>
-    <body>
-        <script>
-            var fearThresh = 0.01, sadThresh = 0.02;
-        
-        function previewFile() {
+
+	<head>
+
+	<title>Emotion recognition for crisis </title>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+
+    	<script>
+
+        	var fearThresh = 0.01, sadThresh = 0.02;
+
+   	 
+
+    	function previewFile() {
+
   var preview = document.querySelector('img');
-  var file    = document.querySelector('input[type=file]').files[0];
+
+  var file	= document.querySelector('input[type=file]').files[0];
+
  
+
   if (file) {
-      var reader=new FileReader();
-      reader.addEventListener("load",function(result){
-          preview.src = reader.result;
-          /*var imgurl=result.currentTarget.result;
-          sendAPIRequest(imgurl);*/
-      });
-      reader.readAsDataURL(file);
+
+  	var reader=new FileReader();
+
+  	reader.addEventListener("load",function(result){
+
+      	preview.src = reader.result;
+
+      	/*var imgurl=result.currentTarget.result;
+
+      	sendAPIRequest(imgurl);*/
+
+  	});
+
+  	reader.readAsDataURL(file);
+
   }
+
 }
-       function submit(input){
-            //  var preview=document.querySelector("img");
-                //sendAPIRequest(preview.src);
-               // sendAPIRequest(imgurl);
-           //var value = document.getElementById('imgurl').value;
-           //alert("Submit button clicked" + input);
-           sendAPIRequest(input);
-           return true;
-           }
-            
-         var fearTest,sadTest;
-            
-       function sendAPIRequest(imgurl) {
-            var params = {
-            // Request parameters
-        };
-          $.ajax({
-            url: "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?" + $.param(params),
-            beforeSend: function(xhrObj){
 
-                // Request headers
-                xhrObj.setRequestHeader("Content-Type","application/json");
+   	function submit(input){
 
-                // NOTE: Replace the "Ocp-Apim-Subscription-Key" value with a valid subscription key.
-                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","797b49427ad4421d890a07e160d389cc");
-            },
-            type: "POST",
-            data: '{"url":"'+imgurl+'"}'
-        }).done(function(data){
-              
-              for(var i = 0; i<data.length; i++){
-                   //document.write("Fear: " + data[i].scores.fear + "<br />Sadness: " + data[i].scores.sadness);
-                
-                    fearTest = data[i].scores.fear;
-                    sadTest = data[i].scores.sadness;
-                    
-                    if(fearTest > fearThresh){
-                         document.write("<br /><b><a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a></b><br />");
-                        //var fearTxt = "<a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a><br />";
-                        
-                        //var fearTxtLocal = "Help Me I'm Scared!!";
-                        
-                        //document.getElementById(lblFear).value = fearTxtLocal;
-                        
-                        
-                    }
-                    else{ 
-                        document.write("<br />I will be alright!!<br />");
-                        
-                        //fearTxtLocal = "I'm Alright!!";
-                        
-                        //var imOkTxt = "I am OK!!!";
-                        //document.getElementById(lblImOk).innerHTML(imOkTxt);
-                        
-                    }
+        	//  var preview=document.querySelector("img");
 
-                 
-                    if(sadTest > sadThresh){
-                        document.write("<br /><b><a href='sms://+14035550185? body=I NEED HELP'>I NEED HELP</a></b><br />");
-                        
-                        //var sadTxt = "<a href='sms://+14035550185? body=I NEED HELP!!!'>I NEED HELP!!!</a>";
-                        //document.getElementById(lblSad).innerHTML(sadTxt);
-                    }
-                     else{
-                        document.write("<br />I will be fine!!<br />");
-                        
-                        //var imOkTxt = "I am OK!!!";
-                        //document.getElementById(lblImOk).innerHTML(imOkTxt);
-                        }
-                    
-               }
-          }).fail(function(){
-              console.log("error");
-          })//        
-       }                    
-        </script>
+            	//sendAPIRequest(preview.src);
+
+           	// sendAPIRequest(imgurl);
+
+       	//var value = document.getElementById('imgurl').value;
+
+       	//alert("Submit button clicked" + input);
+
+		
+
+       	sendAPIRequest(input);
+
+       	return true;
+
+       	}
+
+       	 
+
+     	var fearTest,sadTest;
+
+       	 
+
+   	function sendAPIRequest(imgurl) {
+
+        	var params = {
+
+        	// Request parameters
+
+    	};
+
+      	$.ajax({
+
+        	url: "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?" + $.param(params),
+
+        	beforeSend: function(xhrObj){
+
+            	// Request headers
+
+            	xhrObj.setRequestHeader("Content-Type","application/json");
+
+            	// NOTE: Replace the "Ocp-Apim-Subscription-Key" value with a valid subscription key.
+
+            	xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","797b49427ad4421d890a07e160d389cc");
+
+        	},
+
+        	type: "POST",
+
+        	data: '{"url":"'+imgurl+'"}'
+
+    	}).done(function(data){
+
+         	 
+
+          	for(var i = 0; i<data.length; i++){
+
+               	//document.write("Fear: " + data[i].scores.fear + "<br />Sadness: " + data[i].scores.sadness);
+
+           	 
+
+                	fearTest = data[i].scores.fear;
+
+                	sadTest = data[i].scores.sadness;
+
+               	 
+
+                	if(fearTest > fearThresh){
+
+                     	//document.write("<br /><b><a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a></b><br />");
+
+						window.location = "http://www.nothingbutstem.com/technica/ImNotOK.html";
+
+						
+
+						//var fearTxt = "<a href='sms://+14035550185? body=HELP ME I'M SCARED!!!'>HELP ME I'M SCARED!!!</a><br />";
+
+						
+
+						//var fearTxtLocal = "Help Me I'm Scared!!";
+
+						
+
+						//document.getElementById(lblFear).value = fearTxtLocal;
+
+						
+
+						
+
+                	}
+
+                	else{ 
+
+						//document.write("<br />I will be alright!!<br />");
+
+						
+
+						window.location = "http://www.nothingbutstem.com/technica/ImOK.html";
+
+						
+
+						//fearTxtLocal = "I'm Alright!!";
+
+						
+
+						//var imOkTxt = "I am OK!!!";
+
+						//document.getElementById(lblImOk).innerHTML(imOkTxt);
+
+						
+
+					}
+
+             	 
+
+                	if(sadTest > sadThresh){
+
+                    	//document.write("<br /><b><a href='sms://+14035550185? body=I NEED HELP'>I NEED HELP</a></b><br />");
+
+						
+
+						window.location = "http://www.nothingbutstem.com/technica/ImNotOK.html";
+
+						
+
+						//var sadTxt = "<a href='sms://+14035550185? body=I NEED HELP!!!'>I NEED HELP!!!</a>";
+
+						//document.getElementById(lblSad).innerHTML(sadTxt);
+
+                	}
+
+                 	else{
+
+						//document.write("<br />I will be fine!!<br />");
+
+						
+
+						window.location = "http://www.nothingbutstem.com/technica/ImOK.html";
+
+						
+
+						//var imOkTxt = "I am OK!!!";
+
+						//document.getElementById(lblImOk).innerHTML(imOkTxt);
+
+						}
+
+					
+
+           	}
+
+      	}).fail(function(){
+
+          	console.log("error");
+
+      	})//   	 
+
+   	}               	 
+
+    	</script>
+
         <style type="text/css">
-            body
-            {
-                background-color: #A70065;
-                background-image: url("http://www.nothingbutstem.com/wp-content/uploads/2017/11/Emotions2.jpg");
-                background-size: 800px 360px;
-                background-repeat:repeat-x;
-                background-position: 80px 100px; 
-                background-color: #cccccc;
-            }
-            
-            
-        
+
+			body
+
+			{
+
+				background-color: #A70065;
+
+				background-image: url("http://www.nothingbutstem.com/wp-content/uploads/2017/11/Emotions2.jpg");
+
+				background-size: 800px 360px;
+
+				background-repeat:repeat-x;
+
+				background-position: 100px 100px; 
+
+				background-color: #cccccc;
+
+			}
+
         </style>
-        <div>            
-            
-            <br/>                 
-                 <input id = "imgurl" type="text"/> Image URL   
 
-            <br />
+    	<div>
+
+            <br/>            	 
+
+             	<input id = "imgurl" type="text"/> Image URL   
+
+             	<br />
+
                 <br />
-                   <button type="submit" onclick="submit(document.getElementById('imgurl').value)" id=testButton> Submit </button>
-        </div>
+
+           		<button type="submit" onclick="submit(document.getElementById('imgurl').value)" id=testButton> Submit </button>
+
+    	</div>
+
             
-        <div>
+
+    	<div>
+
             <label id="lblFear"></label><br />
+
             <label id="lblSad"></label><br />
+
             <label id="lblImOk"></label><br />            
-        </div>
-        
-       
-        
-    </body>
+
+    	</div>
+
+   	 
+
+  	 
+
+   	 
+
+	</body>
+
 </html>
-
-
-
-
-
-
